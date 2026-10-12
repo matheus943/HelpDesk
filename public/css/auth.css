@@ -1,0 +1,118 @@
+/* --- RESET E CONFIGURAÇÕES GLOBAIS --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- ESTILOS PARA TELAS DE AUTENTICAÇÃO (LOGIN / CADASTRO) --- */
+.auth-body {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px; /* Garante margem em telas muito pequenas */
+}
+
+.auth-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px 20px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-card h3 {
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    color: #1e293b;
+    text-align: center;
+    font-weight: 700;
+}
+
+.auth-card .form-group {
+    margin-bottom: 20px;
+}
+
+.auth-card label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #475569;
+}
+
+.auth-card input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem; /* Mínimo 16px evita zoom automático indesejado no iOS */
+    outline: none;
+    transition: all 0.2s ease;
+    background-color: #f8fafc;
+}
+
+.auth-card input:focus {
+    border-color: #0284c7;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.auth-card button {
+    background-color: #0284c7;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 10px;
+}
+
+.auth-card button:hover {
+    background-color: #0369a1;
+}
+
+.auth-card button:active {
+    transform: scale(0.98);
+}
+
+.auth-footer-text {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.auth-footer-text a {
+    color: #0284c7;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-footer-text a:hover {
+    text-decoration: underline;
+}
+
+/* --- RESPONSIVIDADE PARA CELULARES --- */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 20px 15px;
+        border-radius: 8px;
+        box-shadow: none; /* Em telas pequenas, remove sombra pesada para ganhar respiro */
+        border: none;
+    }
+    
+    .auth-body {
+        background: #0f172a; /* Fundo sólido em telas mobile melhora a performance */
+        padding: 10px;
+    }
+}
