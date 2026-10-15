@@ -21,10 +21,12 @@ app.use(express.static('public'))
 
 const ChamadosRoutes = require("./routers/home")
 const authRoutes = require('./routers/auth/AuthRoutes')
+const ChamadosConfig = require("./routers/task")
 
 // Configuração de Rotas
 app.use("/home", ChamadosRoutes)
 app.use("/auth", authRoutes);
+app.use("/chamados", ChamadosConfig)
 
 
 

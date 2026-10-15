@@ -9,19 +9,28 @@
 <body class="auth-body">
     <div class="auth-card">
         <h3>Criar Conta</h3>
-        <form action="/auth/cadastro" method="POST">
+        <form action="/auth/cadastro" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Nome Completo</label>
                 <input type="text" name="nome" required placeholder="Seu nome">
             </div>
+            
             <div class="form-group">
                 <label>E-mail</label>
                 <input type="email" name="email" required placeholder="seu@email.com">
             </div>
+
             <div class="form-group">
                 <label>Senha</label>
                 <input type="password" name="senha" required placeholder="Crie uma senha">
             </div>
+
+            <!-- Novo campo para a foto -->
+            <div class="form-group">
+                <label>Foto de Perfil</label>
+                <input type="file" name="foto" accept="image/*" style="background: none; border: none; padding: 0;">
+            </div>
+
             <button type="submit">Cadastrar</button>
         </form>
         <div class="auth-footer-text">

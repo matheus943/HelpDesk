@@ -1,207 +1,341 @@
+/* --- ESTILOS GLOBAIS E CORES --- */
+.dashboard-body {
+    background-color: #0b1329; /* Fundo geral em azul bem escuro */
+    color: #e2e8f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-        /* --- RESET E ESTILOS GERAIS --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+/* Cabeçalho */
+.dashboard-header {
+    background: #111c38; /* Azul marinha escuro */
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
 
-        body {
-            background-color: #f4f6f9;
-            color: #333;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
+.dashboard-main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
 
-        /* --- BARRA LATERAL (SIDEBAR) --- */
-        aside {
-            width: 260px;
-            background-color: #1e293b;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-        }
+/* Cards principais (Formulário e Listagem) */
+.dashboard-card {
+    background: #131f3f; /* Azul marinha escuro para os blocos */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+    border: 1px solid #1e293b;
+}
 
-        aside h2 {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: #38bdf8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+.dashboard-card h3 {
+    margin-bottom: 20px;
+    color: #f8fafc;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
 
-        aside nav a {
-            color: #94a3b8;
-            text-decoration: none;
-            padding: 12px 15px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            display: block;
-            transition: all 0.3s;
-        }
+/* --- PERFIL E BOTÃO SAIR --- */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
-        aside nav a:hover, aside nav a.active {
-            background-color: #334155;
-            color: #fff;
-        }
+.user-avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #38bdf8;
+}
 
-        /* --- CONTEÚDO PRINCIPAL --- */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
+.user-avatar-default {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #1e3a8a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    border: 2px solid #38bdf8;
+}
 
-        header {
-            background-color: #fff;
-            padding: 20px 30px;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.logout-link-btn {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
 
-        header h1 {
-            font-size: 1.5rem;
-            color: #1e293b;
-        }
+.logout-link-btn:hover {
+    color: #ef4444;
+}
 
-        .user-info {
-            font-size: 0.9rem;
-            color: #64748b;
-        }
+/* --- FORMULÁRIOS --- */
+.form-group {
+    margin-bottom: 15px;
+}
 
-        .container {
-            padding: 30px;
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-        }
+.dashboard-card label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #cbd5e1;
+    font-size: 0.9rem;
+}
 
-        /* --- GRID DO PAINEL --- */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-        }
+.dashboard-card input[type="text"],
+.dashboard-card textarea,
+.form-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #0b1329;
+    color: #f8fafc;
+    outline: none;
+    transition: border-color 0.2s;
+}
 
-        @media (max-width: 900px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-            body {
-                flex-direction: column;
-                height: auto;
-                overflow: auto;
-            }
-            aside {
-                width: 100%;
-            }
-        }
+.dashboard-card input[type="text"]:focus,
+.dashboard-card textarea:focus,
+.form-select:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
 
-        /* --- CARDS E FORMULÁRIOS --- */
-        .card {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
-        }
+.dashboard-card textarea {
+    min-height: 90px;
+    resize: vertical;
+}
 
-        .card h3 {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: #1e293b;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 10px;
-        }
+.btn-submit {
+    background: #0284c7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+.btn-submit:hover {
+    background: #0369a1;
+}
 
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #475569;
-        }
+/* --- GRID ADAPTÁVEL DE CHAMADOS (340px largura / 260px altura) --- */
+.chamados-grid {
+    display: grid;
+    /* Adapta automaticamente o número de colunas garantindo o min de 340px por card */
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 12px;
+}
 
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
+.chamado-card-item {
+    width: 100%;
+    max-width: 340px; /* Garante exatamente 340px max por card */
+    height: 300px;     /* Altura exata de 260px */
+    border: 1px solid #334155;
+    padding: 16px;
+    border-radius: 8px;
+    background: #0b1329; /* Fundo interno do card em azul escuro */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
 
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            border-color: #0284c7;
-        }
+.chamado-card-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    border-color: #475569;
+}
 
-        button {
-            background-color: #0284c7;
-            color: #fff;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.2s;
-        }
+/* Cabeçalho do Card */
+.chamado-header-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
 
-        button:hover {
-            background-color: #0369a1;
-        }
+/* Título com forte destaque */
+.chamado-titulo-destaque {
+    color: #f8fafc;
+    font-size: 1.1rem;
+    font-weight: 800;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 0;
+}
 
-        /* --- LISTA DE CHAMADOS --- */
-        .ticket-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+/* Status */
+.chamado-status {
+    font-size: 0.65rem;
+    padding: 3px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #1e3a8a;
+    color: #38bdf8;
+    white-space: nowrap;
+}
 
-        .ticket-item {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            padding: 15px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* Descrição com Scroll */
+.chamado-desc-container {
+    max-height: 80%;
+    overflow-y: auto;
+    padding-right: 4px;
+    margin: 6px 0;
+}
 
-        .ticket-info h4 {
-            font-size: 1rem;
-            color: #1e293b;
-            margin-bottom: 4px;
-        }
+.chamado-desc-container::-webkit-scrollbar {
+    width: 4px;
+}
+.chamado-desc-container::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
 
-        .ticket-info p {
-            font-size: 0.85rem;
-            color: #64748b;
-        }
+.chamado-desc {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    margin: 0;
+}
 
-        /* Badges de Status e Prioridade */
-        .badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+/* Meta dados (Rodapé do Card) */
+.chamado-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    color: #64748b;
+    border-top: 1px solid #1e293b;
+    padding-top: 6px;
+    margin-top: auto;
+}
 
-        .badge-alta { background-color: #fee2e2; color: #991b1b; }
-        .badge-media { background-color: #fef3c7; color: #92400e; }
-        .badge-baixa { background-color: #e0f2fe; color: #0369a1; }
-        
-        .badge-aberto { background-color: #dcfce7; color: #166534; }
+.chamado-info strong {
+    color: #cbd5e1;
+}
+.chamado-info {
+    padding: 5px;
+    margin: 3px;
+}
+
+/* Botões do Técnico dentro do card */
+.btn-solid {
+    background: #0284c7;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+    justify-content: space-between;
+}
+
+.btn-solid:hover {
+    background: #0369a1;
+}
+
+/* --- MODAL DE LOGOUT --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(11, 19, 41, 0.75);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-card {
+    background: #131f3f;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    border: 1px solid #334155;
+}
+
+.modal-card h3 {
+    color: #f8fafc;
+    margin-bottom: 10px;
+}
+
+.modal-card p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-cancel {
+    flex: 1;
+    background: #1e293b;
+    color: #cbd5e1;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background: #334155;
+}
+
+.btn-confirm-logout {
+    flex: 1;
+    background: #ef4444;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.btn-confirm-logout:hover {
+    background: #dc2626;
+}
+
+.botao button{
+    justify-content: center;
+}

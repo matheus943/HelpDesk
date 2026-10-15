@@ -3,14 +3,42 @@ const router = express.Router()
 const bcrypt = require('bcryptjs')
 const db = require('../../models/models')
 
+// Upload imagem
+const multer = require('multer')
+const path = require('path')
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads/');
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ 
+    storage: storage,
+    limits: { fileSize: 2 * 1024 * 1024 }, // Limite de 2MB por imagem
+    fileFilter: (req, file, cb) => {
+        // Aceita apenas imagens
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Apenas ficheiros de imagem são permitidos!'), false);
+        }
+    }
+});
 
 // Tela de Cadastro
 router.get('/cadastro', (req, res) => {
-    res.render('auth/cadastro');
+    res.render('auth/Cadastro');
 });
 
-router.post('/cadastro', async (req, res) => {
+router.post('/cadastro', upload.single('foto'), async (req, res) => {
     const { nome, email, senha } = req.body;
+
+    const fotoPerfil = req.file ? req.file.filename : null;
 
     try {
 
@@ -19,8 +47,8 @@ router.post('/cadastro', async (req, res) => {
         const senhaHash = await bcrypt.hash(senha, salt);
 
         // Salvar no Banco
-        const query = 'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)';
-        db.query(query, [nome, email, senhaHash], (err, result) => {
+        const query = 'INSERT INTO usuarios (nome, email, senha, foto_perfil) VALUES (?, ?, ?, ?)';
+        db.query(query, [nome, email, senhaHash, fotoPerfil], (err, result) => {
             if(err) {
                 console.error('Erro ao cadastrar usuário', err);
                 return res.status(500).send('Erro no servidor ao cadastrar.');
@@ -74,10 +102,11 @@ router.post('/login', (req, res) => {
 });
 
 // --- ROTA DE LOGOUT ---
-router.get('/logout', (req, res) => {
+
+router.get("/logout", (req, res) => {
     req.session.destroy(() => {
-        res.redirect('./login');
-    });
-});
+        res.redirect("./login")
+    })
+})
 
 module.exports = router
