@@ -93,8 +93,13 @@
                     <div class="botao">
                         <% if (tipoUsuario == "tecnico") { %>
                             <div class="d-grid gap-9 md:d-flex md:justify-content-center">
-                                <button class="btn-solid theme-primary md:me-2 w-50" type="button">Trocar Prioridade</button>
+                                <button class="btn-solid theme-primary md:me-2 w-50" type="button" onclick="openPriorityModal('<%= chamado.id %>')">Trocar Prioridade</button>
                                 <button class="btn-solid theme-primary w-50" type="button">Concluido</button>
+                            </div>
+                        <% } %>
+                        <% if (tipoUsuario == "cliente") { %>
+                            <div class="d-grid gap-9 md:d-flex md:justify-content-center">
+                                <button class="btn-solid theme-primary md:me-2 w-50" type="button" onclick="openEditClientModal('<%= chamado.id %>', '<%= chamado.titulo %>', '<%= chamado.prioridade %>', `<%= chamado.descricao %>`)">Editar</button>
                             </div>
                         <% } %>
                     </div>
@@ -116,6 +121,66 @@
             </div>
         </div>
     </div>
+    <!-- MODAL DE ALTERAR PRIORIDADE -->
+    <div id="priorityModal" class="modal-overlay">
+        <div class="modal-card">
+            <h3>Alterar Prioridade do Chamado</h3>
+            <p>Selecione a nova prioridade para este atendimento:</p>
+            
+            <!-- O action será preenchido dinamicamente pelo JavaScript -->
+            <form id="priorityForm" method="POST">
+                <div class="priority-options" style="text-align: left; margin: 20px 0; display: flex; flex-direction: column; gap: 10px;">
+                    <label style="color: #cbd5e1; cursor: pointer;">
+                        <input type="radio" name="prioridade" value="baixa" required> Baixa
+                    </label>
+                    <label style="color: #cbd5e1; cursor: pointer;">
+                        <input type="radio" name="prioridade" value="media" checked> Média
+                    </label>
+                    <label style="color: #cbd5e1; cursor: pointer;">
+                        <input type="radio" name="prioridade" value="alta"> Alta
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closePriorityModal()">Cancelar</button>
+                    <button type="submit" class="btn-submit" style="flex: 1;">Salvar Alteração</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- MODAL DE ALTERAÇÃO DO CLIENTE -->
+<div id="editClientModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 450px; text-align: left;">
+        <h3 style="text-align: center; margin-bottom: 15px;">Editar Chamado</h3>
+        
+        <!-- O action será preenchido dinamicamente pelo JavaScript com o ID do chamado -->
+        <form id="editClientForm" method="POST">
+            <div class="form-group">
+                <label>Título</label>
+                <input type="text" id="editTitulo" name="titulo" required>
+            </div>
+
+            <div class="form-group">
+                <label>Prioridade</label>
+                <select name="prioridade" id="editPrioridade" class="form-select">
+                    <option value="baixa">Baixa</option>
+                    <option value="media">Média</option>
+                    <option value="alta">Alta</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea name="descricao" id="editDescricao" required style="min-height: 100px;"></textarea>
+            </div>
+
+            <div class="modal-actions" style="margin-top: 20px;">
+                <button type="button" class="btn-cancel" onclick="closeEditClientModal()">Cancelar</button>
+                <button type="submit" class="btn-submit" style="flex: 1;">Salvar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
 
     <!-- SCRIPT PARA CONTROLAR O MODAL -->
     <script>
@@ -134,6 +199,63 @@
                 closeLogoutModal();
             }
         }
+
+        function openPriorityModal(chamadoId) {
+        const modal = document.getElementById('priorityModal');
+        const form = document.getElementById('priorityForm');
+        
+        // Define dinamicamente para qual rota o formulário vai enviar o ID correto
+        form.action = `/chamados/alteracao/${chamadoId}`;
+        
+        modal.classList.add('active');
+    }
+
+    function closePriorityModal() {
+        document.getElementById('priorityModal').classList.remove('active');
+    }
+
+    // Fecha o modal se clicar fora dele
+    window.onclick = function(event) {
+        const priorityModal = document.getElementById('priorityModal');
+        const logoutModal = document.getElementById('logoutModal');
+        
+        if (event.target === priorityModal) {
+            closePriorityModal();
+        }
+        if (event.target === logoutModal) {
+            closeLogoutModal();
+        }
+    }
+
+    function openEditClientModal(id, titulo, prioridade, descricao) {
+    const modal = document.getElementById('editClientModal');
+    const form = document.getElementById('editClientForm');
+    
+    // Define a rota de envio para o ID correto do chamado
+    form.action = `/chamados/alteracao/${id}`;
+    
+    // Preenche os inputs com os valores atuais do chamado
+    document.getElementById('editTitulo').value = titulo;
+    document.getElementById('editPrioridade').value = prioridade;
+    document.getElementById('editDescricao').value = descricao;
+    
+    modal.classList.add('active');
+}
+
+function closeEditClientModal() {
+    document.getElementById('editClientModal').classList.remove('active');
+}
+
+// Atualize a função de fechar ao clicar fora para incluir o novo modal
+window.onclick = function(event) {
+    const priorityModal = document.getElementById('priorityModal');
+    const logoutModal = document.getElementById('logoutModal');
+    const editClientModal = document.getElementById('editClientModal');
+    
+    if (event.target === priorityModal) closePriorityModal();
+    if (event.target === logoutModal) closeLogoutModal();
+    if (event.target === editClientModal) closeEditClientModal();
+}
     </script>
 </body>
 </html>
